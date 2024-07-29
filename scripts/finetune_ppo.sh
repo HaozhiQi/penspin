@@ -1,0 +1,12 @@
+CUDA_VISIBLE_DEVICES=0 python ./real/finetune_ppo.py \
+--real-dataset-folder="real_data/baked_data" \
+--checkpoint-path="real/checkpoints/best_120.74.pth" \
+--real-batch-size=512 \
+--lr=1e-3 \
+--weight-decay=0 \
+--val-ratio=0.1 \
+--num-epochs=3000 \
+--eval-freq=100 \
+--eval-start-epoch=400 \
+--seed=20240601 \
+--input-mode="proprio"

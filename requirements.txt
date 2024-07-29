@@ -1,0 +1,10 @@
+hydra-core>=1.1
+termcolor
+omegaconf
+gym
+tensorboard
+tensorboardx
+gdown
+trimesh
+numpy==1.22.4
+wandb

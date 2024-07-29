@@ -1,0 +1,7 @@
+name: AllegroHandGrasp
+defaults:
+  - AllegroHandHora
+
+env:
+  genGrasps: True
+  genGraspCategory: 'hora'

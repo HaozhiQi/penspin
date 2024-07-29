@@ -1,0 +1,154 @@
+# used to create the object
+name: AllegroHandHora
+physics_engine: ${..physics_engine}
+on_evaluation: False
+eval_cache_name: debug
+
+env:
+  initPoseMode: 'high'
+  numEnvs: ${resolve_default:8192,${...num_envs}}
+  numObservations: 96
+  numActions: 16
+  envSpacing: 0.5
+  obs_with_binary_contact: False  # 108 obs
+
+  episodeLength: 400
+  enableDebugVis: False
+  aggregateMode: 1
+
+  controller:
+    torque_control: True
+    controlFrequencyInv: 10  # 20Hz
+    pgain: 3
+    dgain: 0.1
+    action_scale: 0.04167
+    torque_limit: 0.7
+
+  rotation_axis: '-z'
+  genGrasps: False
+  genGraspCategory: 'hora'
+
+  clipObservations: 5.0
+  clipActions: 1.0
+  reset_height_threshold: 0.645
+  grasp_cache_name: 'internal_allegro'
+
+  # Random forces applied to the object
+  forceScale: 0.0
+  randomForceProbScalar: 0.0
+  forceDecay: 0.9
+  forceDecayInterval: 0.08
+  enable_obj_ends: False
+
+  hora:
+    propHistoryLen: 30
+    critic_obs_dim: 100
+    point_cloud_sampled_dim: 0
+    render_slowness: 1
+
+  reward:
+    angvelClipMin: -0.5
+    angvelClipMax: 0.5
+    angvelPenaltyThres: 1.0
+    # reward scale: [init scale, final scale, curriculum start, curriculum end]
+    # single scalar means no curriculum
+    rotate_reward_scale: 1.0
+    obj_linvel_penalty_scale: -0.3
+    pose_diff_penalty_scale: -0.1
+    torque_penalty_scale: -0.1
+    work_penalty_scale: -1.0
+    rotate_penalty_scale: -0.3
+    pencil_z_dist_penalty_scale: -1.0
+    # canonical position
+    position_penalty_scale: -0.1
+    action_penalty_scale: 0.0
+
+  baseObjScale: 0.8
+  randomization:
+    # Randomization Property
+    randomizeMass: True
+    randomizeMassLower: 0.01
+    randomizeMassUpper: 0.02
+    randomizeCOM: True
+    randomizeCOMLower: -0.001
+    randomizeCOMUpper: 0.001
+    randomizeFriction: True
+    randomizeFrictionLower: 0.3
+    randomizeFrictionUpper: 3.0
+    randomizeScale: True
+    randomize_hand_scale: False
+    # if scale_list_init is True, randomizeScaleLower and randomizeScaleUpper is not useful
+    scaleListInit: True
+    randomizeScaleList: [0.78, 0.8, 0.82, 0.84, 0.86]
+    randomizeScaleLower: 0.75  # only useful when not scaleListInit
+    randomizeScaleUpper: 0.8  # only useful when not scaleListInit
+    randomizePDGains: True
+    randomizePGainLower: 2.5
+    randomizePGainUpper: 3.5
+    randomizeDGainLower: 0.09
+    randomizeDGainUpper: 0.11
+    obs_noise_e_scale: 0.01
+    obs_noise_t_scale: 0.005
+    pose_noise_scale: 0
+    action_noise_e_scale: 0.01
+    action_noise_t_scale: 0.005
+    jointNoiseScale: 0.0
+    # stage 2 specific:
+    noisy_rpy_scale: 0.1
+    noisy_pos_scale: 0.02
+
+  privInfo:
+    enableObjPos: True
+    enableObjScale: True
+    enableObjMass: True
+    enableObjCOM: True
+    enableObjFriction: True
+    enable_obj_restitution: True
+    enable_tactile: False
+    enableNetContactF: False
+    contact_input_dim: 4  # 12
+    contact_form: 'gpu_contact'
+    contact_input: 'binary'
+    contact_binarize_threshold: 0.1
+    enable_obj_orientation: False
+    enable_obj_linvel: False
+    enable_obj_angvel: False
+    enable_ft_pos: False
+    enable_ft_orientation: False
+    enable_ft_linvel: False
+    enable_ft_angvel: False
+    enable_hand_scale: False
+
+  object:
+    type: 'block' # can be block, egg or pen
+    evalObjectType: null # set to a string object name to evaluate on only one object
+    sampleProb: [1.0]
+
+  asset:
+    # handAsset: 'assets/xarm/xarm6_allegro_right_fsr_2023_thin.urdf'
+    handAsset: 'assets/round_tip/allegro_hand_right_fsr_round_dense.urdf'
+    # handAsset: 'assets/allegro/allegro_internal.urdf'
+
+  # set to True if you use camera sensors in the environment
+  enableCameraSensors: False
+
+sim:
+  dt: 0.005 # 200 Hz
+  substeps: 1
+  up_axis: 'z'
+  use_gpu_pipeline: ${eq:${...pipeline},'gpu'}
+  gravity: [0.0, 0.0, -9.81]
+  physx:
+    num_threads: ${....num_threads}
+    solver_type: ${....solver_type}
+    use_gpu: ${contains:'cuda',${....sim_device}} # set to False to run on CPU
+    num_position_iterations: 8
+    num_velocity_iterations: 0
+    max_gpu_contact_pairs: 8388608 # 8*1024*1024
+    num_subscenes: ${....num_subscenes}
+    contact_offset: 0.002
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 1000.0
+    default_buffer_size_multiplier: 5.0
+    contact_collection: 1 # 0: CC_NEVER (don't collect contact info), 1: CC_LAST_SUBSTEP (collect only contacts on last substep), 2: CC_ALL_SUBSTEPS (default - all contacts)

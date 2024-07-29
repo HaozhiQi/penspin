@@ -1,0 +1,78 @@
+seed: ${..seed}
+algo: PPO
+network:
+  mlp:
+    units: [512, 256, 128]
+  priv_mlp:
+    units: [256, 128, 8]
+  point_mlp:
+    units: [32, 32, 32]
+  contact_mlp:
+    units: [32, 32, 32]
+  use_point_transformer: False
+
+load_path: ${..checkpoint} # path to the checkpoint to load
+demon_path: None
+
+ppo:
+  output_name: 'debug'
+  multi_gpu: False
+  normalize_input: True
+  normalize_value: True
+  normalize_priv: True
+  normalize_point_cloud: True
+  value_bootstrap: True
+  num_actors: ${...task.env.numEnvs}
+  normalize_advantage: True
+  gamma: 0.99
+  tau: 0.95
+  learning_rate: 5e-3
+  kl_threshold: 0.02
+  # PPO batch collection
+  is_demon: True
+  horizon_length: 8
+  minibatch_size: 16384
+  mini_epochs: 5
+  # PPO loss setting
+  clip_value: True
+  critic_coef: 4
+  entropy_coef: 0.0
+  e_clip: 0.2
+  bounds_loss_coef: 0.0
+  distill_loss_coef: 0.0
+  # grad clipping
+  truncate_grads: True
+  grad_norm: 1.0
+  # snapshot setting
+  # in terms of agent steps (should consider multi-gpu)
+  save_best_after: 0
+  save_frequency: 500
+  max_agent_steps: 3000000000
+  # hora setting
+  priv_info: False
+  proprio_mode: True
+  input_mode: 'proprio-ends' # ['proprio-ends', 'proprio-ends-fingertip', 'proprio-tactile', 'proprio-tactile-ends-fingertip']
+  use_point_cloud_info: True
+  proprio_len: 30
+  distill: False
+  priv_info_embed_dim: 8
+  proprio_adapt: False
+  # asymmetric critic
+  asymm_actor_critic: False
+  critic_info_dim: 100
+  enable_latent_loss: False
+  use_l1: False
+
+padapt:
+  action_imitation: False
+  cache_suffix: 'stage2'
+  with_noisy_quat: False
+  with_goal_quat: False  # only use in reorientation
+  iter_per_step: 1
+  expert_fine_contact: False
+  contact_distillation: False
+  conv_with_batch_norm: False
+  use_deformable_conv: False
+  use_temporal_transformer: False
+  use_position_encoder: False
+  separate_temporal_fusion: False
