@@ -15,6 +15,7 @@ This repository contains a reference PyTorch implementation of the paper:
 [Jitendra Malik](https://people.eecs.berkeley.edu/~malik/),
 [Xiaolong Wang](https://xiaolonw.github.io/) <br>
 [[Website](https://penspin.github.io/)]
+[[Paper](https://arxiv.org/abs/2407.18902)]
 
 ## Installation
 
@@ -118,7 +119,7 @@ If you find **PenSpin** or this codebase helpful in your research, please consid
 @article{wang2024penspin,
   author={Wang, Jun and Yuan, Ying and Che, Haichuan and Qi, Haozhi and Ma, Yi and Malik, Jitendra and Wang, Xiaolong},
   title={Lessons from Learning to Spin “Pens”},
-  journal={},
+  journal={arXiv:2405.07391},
   year={2024}
 }
 ```
