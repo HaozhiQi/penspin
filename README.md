@@ -116,10 +116,10 @@ Note: This repository is built based on [Hora](https://github.com/HaozhiQi/hora)
 If you find **PenSpin** or this codebase helpful in your research, please consider citing:
 
 ```
-@article{wang2024penspin,
-  author={Wang, Jun and Yuan, Ying and Che, Haichuan and Qi, Haozhi and Ma, Yi and Malik, Jitendra and Wang, Xiaolong},
-  title={Lessons from Learning to Spin “Pens”},
-  journal={arXiv:2405.07391},
-  year={2024}
-}
+@inproceedings{wang2024penspin,
+   author={Wang, Jun and Yuan, Ying and Che, Haichuan and Qi, Haozhi and Ma, Yi and Malik, Jitendra and Wang, Xiaolong},
+   title={Lessons from Learning to Spin “Pens”},
+   booktitle={CoRL},
+   year={2024}
+ }
 ```
