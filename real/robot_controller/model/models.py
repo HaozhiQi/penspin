@@ -233,7 +233,7 @@ class ActorCritic(nn.Module):
             new_priv = self.env_mlp(new_priv)
             extrin_gt = new_priv
 
-            extrin = torch.cat([new_priv,extrin],dim=-1)
+            extrin = torch.cat([extrin, new_priv],dim=-1)
             extrin = torch.tanh(extrin)
             obs_input = torch.cat([obs, extrin], dim=-1)
         
