@@ -35,7 +35,7 @@ The following session only provides example script of our method. For baselines,
 
 ```
 cd outputs/AllegroHandHora
-gdown 1LCRFE6lvKSUDPpUfEATOmpDUPDbB7n8d
+gdown 1bzhVCb8L9ib1T9t089dMVujuERObGS10
 unzip demo.zip -d ./
 cd ../../
 scripts/vis_teacher.sh demo
@@ -66,7 +66,7 @@ Note we use the teacher rollout to train student policy, in contrast to DAgger i
 ```
 scripts/train_student_sim.sh train.ppo.is_demon=True train.demon_path=ORACLE_CHECKPOINT_PATH 
 ```
-We have provided a reference teacher checkpoint in [Google Drive](https://drive.google.com/file/d/1LCRFE6lvKSUDPpUfEATOmpDUPDbB7n8d/view?usp=sharing).
+We have provided a reference teacher checkpoint in [Google Drive](https://drive.google.com/file/d/1bzhVCb8L9ib1T9t089dMVujuERObGS10/view?usp=sharing).
 
 ## Step 3: Open-Loop Replay in Real Hardware
 

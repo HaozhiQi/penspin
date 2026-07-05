@@ -30,8 +30,7 @@ Download IsaacGym Preview 4.0 ([Download](https://developer.nvidia.com/isaac-gym
 
 You can also download from our google drive by
 ```
-gdown 1StaRl_hzYFYbJegQcyT7-yjgutc6C7F9 -O ISAAC_PATH
-cd ISAAC_PATH
+gdown 17MvMAosN4FXm9lzEjpO1fdH-bVw13aSn -O IsaacGym_Preview_4_Package.tar.gz
 tar -xzvf IsaacGym_Preview_4_Package.tar.gz
 cd isaacgym/python
 pip install -e .
